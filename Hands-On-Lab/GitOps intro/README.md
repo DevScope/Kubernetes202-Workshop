@@ -11,7 +11,7 @@ Content
     * [Connect to Azure Arc](#connect-to-azure-arc)
     * [Exercises](#exercises)
         * [Exercise 1: Deploy GitOps Configurations and perform basic GitOps flow](#exercise-1-deploy-gitops-configurations-and-perform-basic-gitops-flow)
-        * [Exercise 2: Deploy]()
+        * [Exercise 2: Deploy GitOps Configurations and perform Helm-based GitOps flow](#exercise-2-deploy-gitops-configurations-and-perform-helm-based-gitops-flow)
 
 # GitOps Intro
 
@@ -91,7 +91,7 @@ This lab assumes you have:
 
     ![Media1](./media/1.png)
 
-2. In the side navigation menu, search for Infrastructure > Kubernetes clusters. Click in "Add a Kubernetes cluster with Azure Arc"
+2. In the side navigation menu, search for Infrastructure > Kubernetes clusters. Click in `Add a Kubernetes cluster with Azure Arc`
 
     ![Media2](./media/2.png)
 
@@ -117,7 +117,7 @@ This lab assumes you have:
 
     ![Media5](./media/5.png)
 
-7. Select the context "docker-desktop"
+7. Select the context `docker-desktop`
 
     ```code
     kubectl config set-context docker-desktop
@@ -131,7 +131,7 @@ This lab assumes you have:
 
     And wait...
 
-9. When the execution of the command finishes, procede to the next step. Azure verifies the connection to your cluster. If the connection was established successfully, click on "Go to the cluster"
+9. When the execution of the command finishes, procede to the next step. Azure verifies the connection to your cluster. If the connection was established successfully, click on `Go to the cluster`
 
     ![Media8](./media/8.png)
 
@@ -191,7 +191,7 @@ The exercises are made to use mostly the command-line. Of course, some of the re
 
     ![Media11](./media/11.png)
 
-6. Check the deployments created in the cluster, in the hello-arc namespace
+6. Check the deployments created in the cluster, in the `hello-arc` namespace
 
     ```code
     kubectl get deployment -n hello-arc
@@ -199,7 +199,7 @@ The exercises are made to use mostly the command-line. Of course, some of the re
 
 7. You deployed NGINX so you should be able to access the application. Since the cluster is deployed on your machine, the external IP will be, of course, 127.0.0.1 (or localhost)
 
-    In a normal cluster you would check the service of NGINX ingress controller IP Address through K8S Lens or use kubectl
+    In a normal cluster you would check the service of NGINX ingress controller IP Address through `K8S Lens` or use `kubectl`
 
     ```code
     kubectl get svc -n cluster-mgmt
@@ -207,7 +207,7 @@ The exercises are made to use mostly the command-line. Of course, some of the re
 
 7. Paste the IP address in your browser and check if the applications responds
 
-8. Now go the "yaml" folder a edit the "hello_arc.yaml" file and change the value of the environment variabled named "MESSAGE". Commit the changes to the remote repository.
+8. Now go the `yaml` folder a edit the `hello_arc.yaml` file and change the value of the environment variabled named `MESSAGE`. Commit the changes to the remote repository.
 
     ![Media12](./media/12.png)
 
