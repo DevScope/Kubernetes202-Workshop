@@ -101,6 +101,7 @@ This lab assumes you have:
      * Region: (Europe) West Europe
     </br>
     </br>
+    
     ![Media3](./media/3.png)
 
 4. Its a best practice to add tags to your resources in Azure. Ignore the tags tab for now and skip to the next tab!
