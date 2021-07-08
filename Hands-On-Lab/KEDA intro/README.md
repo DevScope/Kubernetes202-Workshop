@@ -287,22 +287,7 @@ helm repo add bitnami https://charts.bitnami.com/bitnami
 helm install rabbitmq --set auth.username=user --set auth.password=PASSWORD bitnami/rabbitmq
 ```
 
-If you don't have helm installed run the following:
-
-1. Install [Chocolatey](https://chocolatey.org/install)
-
-```powershell
-Set-ExecutionPolicy Bypass -Scope Process -Force; 
-
-[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
-```
-
-2. Use Chocolatey to install Helm 3
-
-    ```code
-    choco install kubernetes-helm
-    ```
-
+If you don't have helm installed visit the ![Helm install page](https://helm.sh/docs/intro/install/) to install helm.
 And repeat the command:
 
 ```powershell
