@@ -49,7 +49,35 @@ This lab assumes you have:
     choco install kubernetes-helm
     ```
 
-5. Get the Flux command-line tool
+5. Get the [Flux](https://github.com/fluxcd/flux2) command-line tool. This tutorial shows only how to get it to Windows. 
+
+    > **Note: If you're working with other operating system follow the instructions in the [Flux installation documentation](https://fluxcd.io/docs/installation/#install-the-flux-cli)**.
+
+    5.1. Create a folder at `C:\` named `bin` or use a folder where you store your binary files
+
+    ```code
+    mkdir C:\bin
+    ```
+    
+    5.2. Download the lastest version of Flux  [here](https://github.com/fluxcd/flux2/releases). Make sure to download the right zip file regarding the operating system architecture.
+
+    ![Media13](./media/13.png)
+
+    5.3. Extract the zip file and move the extracted content to `C:\bin`
+
+    5.4. In the search bar, search for `Edit the system environment variables` and click it.
+
+    5.5. Go to `Environment Variables...`
+    
+    ![Media14](./media/14.png)
+
+    5.6. In the `System variables` list, search for a variable named `Path`, click on it and edit it.
+
+    ![Media15](./media/15.png)
+
+    5.7 Click on `New` and add the path that was previously created `C:\bin`.
+
+    ![Media16](./media/16.png)
 
 ## Installing Flux on Kubernetes
 
@@ -75,19 +103,42 @@ The exercises are made to use mostly the command-line. Of course, some of the re
 
 ### Exercise 1: Deploy GitOps Configurations and perform basic GitOps flow
 
-1. Create a namespace named `hello-arc`
+1. First of all, create a namespace named `cluster-mgmt` in your cluster using kubectl
+
+    ```code
+    kubectl create namespace cluster-mgmt
+    ```
+
+2. Add the official helm stable repository of NGINX ingress controller
+
+    ```code
+    helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+    helm repo update
+    ```
+
+    ![Media3](./media/3.png)
+
+3. Install the NGINX chart into the cluster on the previously created namespace
+
+    ```code
+    helm install nginx ingress-nginx/ingress-nginx -n cluster-mgmt
+    ```
+
+    ![Media4](./media/4.png)
+
+4. Create a namespace named `hello-arc`
 
     ```powershell
     kubectl create namespace hello-arc
     ```
 
-2. Create a folder in the current working directory named `exercise1/sources`
+5. Create a folder in the current working directory named `exercise1/sources`
 
     ```powershell
     mkdir ./exercise1/sources
     ```
 
-3. Create a `GitRepository` manifest pointing to your fork of `hello-arc` demo application's master branch.
+6. Create a `GitRepository` manifest pointing to your fork of `hello-arc` demo application's master branch.
 
     ```powershell
     flux create source git hello-arc `
@@ -99,9 +150,9 @@ The exercises are made to use mostly the command-line. Of course, some of the re
 
     A file should be created in the directory you created previously `exercise1/sources`. This file represents the source of truth of your infrastructure and you will use it later for creating the application Kubernetes resources.
 
-    ![Media3](./media/3.png)
+    ![Media5](./media/5.png)
 
-4. Apply the configuration previously created
+7. Apply the configuration previously created
 
     ```powershell
     kubectl apply -f ./exercise1/sources/hello-arc.yaml -n hello-arc
@@ -113,19 +164,19 @@ The exercises are made to use mostly the command-line. Of course, some of the re
     kubectl get gitrepository -n hello-arc
     ```
 
-    ![Media4](./media/4.png)
+    ![Media6](./media/6.png)
 
     Or using Kubernetes Lens by going to `Custom Resource Definitions > source.toolkit.fluxcd.io > Gitrepositories`
 
-    ![Media5](./media/5.png)
+    ![Media7](./media/7.png)
 
-5. Create a folder in the current working directory named `exercise1/sources`
+8. Create a folder in the current working directory named `exercise1/sources`
 
     ```powershell
     mkdir ./exercise1/configurations
     ```
 
-6. Create a Flux Kustomization manifest for your application. This configures Flux to build and apply the manifests located in the directory specified
+9. Create a Flux Kustomization manifest for your application. This configures Flux to build and apply the manifests located in the directory specified
 
     ```powershell
     flux create kustomization hello-arc `
@@ -140,7 +191,7 @@ The exercises are made to use mostly the command-line. Of course, some of the re
 
     > **Note: This tutorial uses `Kustomize` but the forked repository is not prepared for using it. Flux2 now only uses Kustomize but you can target vanilla manifests because the `kustomize-controller` will create the necessary files for you.** 
 
-7. Apply the configuration previously created
+10. Apply the configuration previously created
 
     ```powershell
     kubectl apply -f ./exercise1/configurations/hello-arc.yaml -n hello-arc
@@ -152,12 +203,24 @@ The exercises are made to use mostly the command-line. Of course, some of the re
     kubectl get kustomization -n hello-arc
     ```
 
-    ![Media6](./media/6.png)
+    ![Media8](./media/8.png)
 
     Or using Kubernetes Lens by going to `Custom Resource Definitions > kustomize.toolkit.fluxcd.io > Kustomizations`
 
-8. After applying the configuration you can check the tab `Workloads > Pods` and with the `hello-arc` namespace checked you can see that the resources were already created!
+11. After applying the configuration you can check the tab `Workloads > Pods` and with the `hello-arc` namespace checked you can see that the resources were already created!
 
-    ![Media7](./media/7.png)
+    ![Media9](./media/9.png)
+
+12. Go to [localhost](http://localhost) in your browser (if using Kubernetes in Docker Desktop) and you can see the application is up and running!
+
+    ![Media10](./media/10.png)
+
+13. Now go to the `yaml` folder in your repository and edit the `hello_arc.yaml` file. Change the value of the environment variabled named `MESSAGE`. Commit the changes to the remote repository.
+
+    ![Media11](./media/11.png)
+
+14. Wait for the operator to notice the changes in `yaml` folder. After ~30 seconds, refresh the page of the application. You should see the message you changed in the environment variable!
+
+    ![Media12](./media/12.png)
 
 ### Exercise 2: Deploy GitOps configurations and perform Helm-based GitOps flow

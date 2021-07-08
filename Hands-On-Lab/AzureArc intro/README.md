@@ -157,7 +157,7 @@ The exercises are made to use mostly the command-line. Of course, some of the re
     helm repo update
     ```
 
-    ![Media10](./media/9.png)
+    ![Media9](./media/9.png)
 
 3. Install the NGINX chart into the cluster on the previously created namespace
 
