@@ -4,14 +4,14 @@
 
 - [KEDA Intro Hands-On-Lab](#keda-intro-hands-on-lab)
 - [KEDA Intro](#keda-intro)
-  - [Abstract and learning objectives](#abstract-and-learning-objectives)
-  - [Overview](#overview)
-  - [Exercise 1: Create and run the application in Docker](#exercise-1-create-and-run-the-application-in-docker)
-    - [Task 1: Deploy a local RabbitMq container](#task-1-deploy-a-local-rabbitmq-container)
-    - [Task 2: Deploy the pub sub application](#task-2-deploy-the-pub-sub-application)
-  - [Exercise 2: Install KEDA and RabbitMq in a Kubernetes Cluster:](#exercise-2-install-keda-and-rabbitmq-in-a-kubernetes-cluster)
-    - [Task 1: Deploy KEDA into our local cluster](#task-1-deploy-keda-into-our-local-cluster)
-  - [Exercise 3: Deploy application using KEDA to scale the app:](#exercise-3-deploy-application-using-keda-to-scale-the-app)
+	- [Abstract and learning objectives](#abstract-and-learning-objectives)
+	- [Overview](#overview)
+	- [Exercise 1: Create and run the application in Docker](#exercise-1-create-and-run-the-application-in-docker)
+		- [Task 1: Deploy a local RabbitMq container](#task-1-deploy-a-local-rabbitmq-container)
+		- [Task 2: Deploy the pub sub application](#task-2-deploy-the-pub-sub-application)
+	- [Exercise 2: Install KEDA and RabbitMq in a Kubernetes Cluster:](#exercise-2-install-keda-and-rabbitmq-in-a-kubernetes-cluster)
+		- [Task 1: Deploy KEDA into our local cluster](#task-1-deploy-keda-into-our-local-cluster)
+	- [Exercise 3: Deploy application using KEDA to scale the app:](#exercise-3-deploy-application-using-keda-to-scale-the-app)
 
 # KEDA Intro
 
@@ -268,6 +268,8 @@ and we can now see our application running and catching the messages of the othe
 ## Exercise 2: Install KEDA and RabbitMq in a Kubernetes Cluster:
 
 Now that our application is ready we can start to prepare our Cluster by adding KEDA and RabbitMq to our local cluster.
+
+A remote image of the pub-sub-app is available on docker hub at hugos99/pub-sub-app.
 
 ### Task 1: Deploy KEDA into our local cluster
 
