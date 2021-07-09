@@ -1,6 +1,6 @@
 # GitOps Intro Hands-On-Lab
 
-Content
+## Content
 
 * [GitOps Intro Hands-On-Lab](#gitops-intro-hands-on-lab)
 * [GitOps Intro](#gitops-intro)
@@ -10,7 +10,7 @@ Content
     * [Installing Flux on Kubernetes](#installing-flux-on-kubernetes)
     * [Exercises](#exercises)
         * [Exercise 1: Deploy GitOps Configurations and perform basic GitOps flow](#exercise-1-deploy-gitops-configurations-and-perform-basic-gitops-flow)
-        * [Exercise 2: Deploy GitOps Configurations and perform Helm-based GitOps flow](#exercise-2-deploy-gitops-configurations-and-perform-helm-based-gitops-flow)
+        <!-- * [Exercise 2: Deploy GitOps Configurations and perform Helm-based GitOps flow](#exercise-2-deploy-gitops-configurations-and-perform-helm-based-gitops-flow) -->
 
 # GitOps Intro
 
@@ -23,7 +23,19 @@ This lab assumes you have:
 * A GitHub account
 * Kubernetes Lens
 
+In the end of the lab you will be able to:
+
+* Install Flux in Kubernetes (the operators and the Custom Resource Definitions)
+* Create Flux Kustomize configurations to deploy a simple application
+* Understand how the pull-based deployments work
+
 ## Overview
+
+This container image can be deployed on a Kubernetes cluster. When accessed via a web browser on port 8080, it will display:
+
+    "Hello World" message
+    Kubernetes pod name
+    Node os information
 
 ## Prerequisites
 
@@ -144,7 +156,7 @@ The exercises are made to use mostly the command-line. Of course, some of the re
     flux create source git hello-arc `
         --url=https://github.com/YOUR_GITHUB_USERNAME/hello_arc `
         --branch=master `
-        --interval=30s -n hello-arc `
+        --interval=30s `
         --export > ./exercise1/sources/hello-arc.yaml
     ```
 
@@ -223,4 +235,42 @@ The exercises are made to use mostly the command-line. Of course, some of the re
 
     ![Media12](./media/12.png)
 
-### Exercise 2: Deploy GitOps configurations and perform Helm-based GitOps flow
+<!-- ### Exercise 2: Deploy GitOps configurations and perform Helm-based GitOps flow
+
+1. Create a namespace named `prod`
+
+    ```powershell
+    kubectl create namespace prod
+    ```
+
+2. Create a folder in the current working directory named `exercise2/configurations`
+
+    ```powershell
+    mkdir ./exercise2/configurations
+    ```
+3. Apply the `GitRepository` configuration previously created in exercise 1
+
+    ```powershell
+    kubectl apply -f ./exercise1/sources/hello-arc.yaml -n prod
+    ```
+
+    You can check if the manifest was correctly applied by executing
+
+    ```powershell
+    kubectl get gitrepository -n prod
+    ```
+
+    Or using Kubernetes Lens by going to `Custom Resource Definitions > source.toolkit.fluxcd.io > Gitrepositories`
+
+
+6. Create a `HelmRelease` manifest pointing to your fork of `hello-arc` demo application's master branch. The source of the helm chart can be referenced in the source resource created in the previous exercise.
+
+    ```powershell
+    flux create helmrelease hello-arc `
+        --interval=30s `
+        --release-name=hello-arc `
+        --target-namespace=prod `
+        --source=GitRepository/hello-arc `
+        --chart=charts/hello-arc `
+        --export > ./exercise2/configurations/hello-arc.yaml
+    ``` -->
